@@ -4,6 +4,7 @@ export const DEFAULT_SETTINGS: Omit<SiteSettings, "id" | "updated_at"> = {
   hero_headline: "Hollow Testament",
   hero_subheadline:
     "Music that feels like a conversation, not a performance.",
+  hero_image_url: null,
   about_short:
     "Indie alt rock built on raw emotion, movement, and honesty — songs for anyone trying to make it through another day.",
   about_long:
@@ -13,13 +14,14 @@ export const DEFAULT_SETTINGS: Omit<SiteSettings, "id" | "updated_at"> = {
   featured_release_spotify_url: null,
   featured_release_youtube_url: null,
   featured_youtube_url: null,
-  spotify_embed_url: null,
+  featured_youtube_embeds: [],
+  spotify_embed_url:
+    "https://open.spotify.com/embed/artist/6xpG6NBhTq9MAeaQsbTtx5?utm_source=generator&theme=0",
   youtube_channel_url: null,
   instagram_url: "https://www.instagram.com/hollow.testament/",
   tumblr_url: "https://www.tumblr.com/hollowtestament",
   x_url: "https://x.com/hollowtestament",
   contact_email: "hollowtestament@gmail.com",
-  contact_phone: "989-954-2590",
 };
 
 export const SITE_NAME = "Hollow Testament";

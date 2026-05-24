@@ -6,9 +6,10 @@ Production-ready band website with a lightweight password-protected admin dashbo
 
 - `/` — Home (hero, featured release, about snippet, video, social)
 - `/music` — Spotify embed, featured release, video
+- `/gallery` — Instagram photo grid (from linked profile)
 - `/about` — Full bio
-- `/updates` — Published announcements
-- `/updates/[slug]` — Single update with shareable meta
+- `/events` — Live shows and tour dates
+- `/events/[slug]` — Single event details with shareable meta
 - `/contact` — Contact form, email, phone, social links
 
 ## Admin (Supabase Auth)
@@ -16,7 +17,7 @@ Production-ready band website with a lightweight password-protected admin dashbo
 - `/admin` — Login
 - `/admin/dashboard` — Overview
 - `/admin/settings` — Edit site content
-- `/admin/updates` — CRUD for news posts
+- `/admin/events` — CRUD for live shows
 
 ## Quick start (local)
 
@@ -39,7 +40,7 @@ Without Supabase env vars, the public site uses built-in default copy. Admin log
 ### RLS summary
 
 - `site_settings`: public read, authenticated write
-- `updates`: public read when `is_published = true`, authenticated full CRUD
+- `events`: public read when `is_published = true`, authenticated full CRUD
 - `media` bucket: public read, authenticated upload
 
 ## Environment variables
@@ -51,6 +52,18 @@ Without Supabase env vars, the public site uses built-in default copy. Admin log
 | `NEXT_PUBLIC_SITE_URL` | Recommended | Canonical URL for SEO/sitemap |
 | `RESEND_API_KEY` | Optional | Sends contact form email |
 | `CONTACT_FROM_EMAIL` | Optional | Resend verified sender |
+| `INSTAGRAM_ACCESS_TOKEN` | Optional | Long-lived Instagram Graph API token for `/gallery` |
+
+## Instagram gallery
+
+The gallery at `/gallery` uses the **Instagram URL** from site settings (default: `@hollow.testament`). To load posts automatically:
+
+1. Convert the Instagram account to a **Business** or **Creator** account and link it to a Facebook Page.
+2. Create a [Meta app](https://developers.facebook.com/) with **Instagram Graph API** access.
+3. Generate a long-lived user access token with `instagram_basic` permission for that account.
+4. Set `INSTAGRAM_ACCESS_TOKEN` in `.env.local` (and Vercel env vars for production).
+
+Posts are cached for one hour. Without a token, the page still links to your Instagram profile.
 
 ## Contact form
 
@@ -80,15 +93,15 @@ Purchase a domain (Namecheap, Cloudflare Domains, etc.) and point DNS to Vercel.
 **Public**
 
 - `GET /api/public/settings`
-- `GET /api/public/updates`
-- `GET /api/public/updates/[slug]`
+- `GET /api/public/events`
+- `GET /api/public/events/[slug]`
 
 **Admin** (requires Supabase session)
 
 - `POST /api/admin/settings`
-- `POST /api/admin/updates`
-- `PUT /api/admin/updates/[id]`
-- `DELETE /api/admin/updates/[id]`
+- `POST /api/admin/events`
+- `PUT /api/admin/events/[id]`
+- `DELETE /api/admin/events/[id]`
 - `POST /api/admin/upload`
 
 ## Scripts

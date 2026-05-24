@@ -1,9 +1,14 @@
 import Image from "next/image";
 import { SiteLayout } from "@/components/layout/site-layout";
-import { SpotifyEmbed, YouTubeEmbed } from "@/components/embed";
+import { SpotifyEmbed } from "@/components/embed";
+import { YouTubeEmbedCards } from "@/components/youtube-embed-cards";
 import { Button } from "@/components/ui/button";
 import { getSiteSettings } from "@/lib/data/settings";
 import { buildMetadata } from "@/lib/seo";
+import { getYouTubeThumbnailUrl } from "@/lib/youtube-embeds";
+
+const SPOTIFY_ARTIST_EMBED_URL =
+  "https://open.spotify.com/embed/artist/6xpG6NBhTq9MAeaQsbTtx5?utm_source=generator&theme=0";
 
 export async function generateMetadata() {
   return buildMetadata({
@@ -16,6 +21,10 @@ export async function generateMetadata() {
 
 export default async function MusicPage() {
   const settings = await getSiteSettings();
+  const releaseCoverUrl = settings.featured_release_cover_url?.trim();
+  const youtubeThumbnailUrl = getYouTubeThumbnailUrl(settings.featured_release_youtube_url);
+  const releaseImageUrl =
+    releaseCoverUrl || youtubeThumbnailUrl || "/logo.jpg";
 
   return (
     <SiteLayout>
@@ -27,20 +36,18 @@ export default async function MusicPage() {
           meant to feel like a conversation — not a performance.
         </p>
 
-        {settings.spotify_embed_url && (
-          <section className="mt-12">
-            <h2 className="font-heading mb-6 text-2xl">On Spotify</h2>
-            <SpotifyEmbed url={settings.spotify_embed_url} title="Hollow Testament on Spotify" />
-          </section>
-        )}
+        <section className="mt-12">
+          <h2 className="font-heading mb-6 text-2xl">On Spotify</h2>
+          <SpotifyEmbed url={SPOTIFY_ARTIST_EMBED_URL} title="Hollow Testament on Spotify" />
+        </section>
 
         <section className="mt-16 border-t border-border pt-16">
-          <h2 className="font-heading text-2xl">Featured Release</h2>
+          <h2 className="font-heading text-2xl">New Release</h2>
           <div className="mt-8 grid gap-8 md:grid-cols-[240px_1fr]">
             <div className="relative aspect-square w-full max-w-[240px] overflow-hidden rounded-sm border border-border">
               <Image
-                src={settings.featured_release_cover_url || "/logo.jpg"}
-                alt={settings.featured_release_title || "Featured release"}
+                src={releaseImageUrl}
+                alt={settings.featured_release_title || "New release"}
                 fill
                 className="object-cover"
                 sizes="240px"
@@ -68,11 +75,12 @@ export default async function MusicPage() {
           </div>
         </section>
 
-        {settings.featured_youtube_url && (
-          <section className="mt-16 border-t border-border pt-16">
-            <h2 className="font-heading mb-6 text-2xl">Music Video</h2>
-            <YouTubeEmbed url={settings.featured_youtube_url} title="Hollow Testament music video" />
-          </section>
+        {settings.featured_youtube_embeds.length > 0 && (
+          <YouTubeEmbedCards
+            embeds={settings.featured_youtube_embeds}
+            sectionTitle={settings.featured_youtube_embeds.length === 1 ? "Music Video" : "Music Videos"}
+            className="mt-16 border-t border-border pt-16"
+          />
         )}
       </div>
     </SiteLayout>

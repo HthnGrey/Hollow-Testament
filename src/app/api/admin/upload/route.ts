@@ -27,6 +27,19 @@ export async function POST(request: Request) {
   });
 
   if (error) {
+    if (
+      error.message.toLowerCase().includes("bucket") &&
+      error.message.toLowerCase().includes("not found")
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "Supabase storage bucket 'media' was not found. Run supabase/migrations/007_media_storage_bucket.sql in the Supabase SQL Editor.",
+        },
+        { status: 400 },
+      );
+    }
+
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
 

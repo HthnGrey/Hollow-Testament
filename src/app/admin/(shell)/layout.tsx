@@ -6,9 +6,11 @@ export default function AdminShellLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background md:grid md:grid-cols-[260px_1fr]">
       <AdminNav />
-      <main className="mx-auto max-w-5xl px-4 py-8">{children}</main>
+      <main className="w-full px-4 py-6 md:px-8 md:py-8">
+        <div className="mx-auto max-w-6xl">{children}</div>
+      </main>
     </div>
   );
 }

@@ -18,17 +18,19 @@ create table if not exists site_settings (
   tumblr_url text,
   x_url text,
   contact_email text default 'hollowtestament@gmail.com',
-  contact_phone text default '989-954-2590',
   updated_at timestamptz default now()
 );
 
-create table if not exists updates (
+create table if not exists events (
   id uuid primary key default gen_random_uuid(),
   title text not null,
   slug text unique not null,
-  body text not null,
+  venue text not null,
+  location text not null,
+  event_date timestamptz not null,
+  ticket_url text,
+  body text,
   image_url text,
-  published_at timestamptz,
   is_published boolean default false,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
@@ -44,8 +46,7 @@ insert into site_settings (
   instagram_url,
   tumblr_url,
   x_url,
-  contact_email,
-  contact_phone
+  contact_email
 ) values (
   'Hollow Testament',
   'Music that feels like a conversation, not a performance.',
@@ -55,12 +56,11 @@ insert into site_settings (
   'https://www.instagram.com/hollow.testament/',
   'https://www.tumblr.com/hollowtestament',
   'https://x.com/hollowtestament',
-  'hollowtestament@gmail.com',
-  '989-954-2590'
+  'hollowtestament@gmail.com'
 ) on conflict do nothing;
 
 alter table site_settings enable row level security;
-alter table updates enable row level security;
+alter table events enable row level security;
 
 create policy "Public read site_settings"
   on site_settings for select
@@ -77,12 +77,12 @@ create policy "Authenticated insert site_settings"
   to authenticated
   with check (true);
 
-create policy "Public read published updates"
-  on updates for select
+create policy "Public read published events"
+  on events for select
   using (is_published = true);
 
-create policy "Authenticated full access updates"
-  on updates for all
+create policy "Authenticated full access events"
+  on events for all
   to authenticated
   using (true)
   with check (true);

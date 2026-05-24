@@ -1,15 +1,15 @@
 import { NextResponse } from "next/server";
-import { getUpdateBySlug } from "@/lib/data/updates";
+import { getEventBySlug } from "@/lib/data/events";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function GET(_request: Request, { params }: Props) {
   const { slug } = await params;
-  const update = await getUpdateBySlug(slug);
+  const event = await getEventBySlug(slug);
 
-  if (!update) {
+  if (!event) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
-  return NextResponse.json(update);
+  return NextResponse.json(event);
 }

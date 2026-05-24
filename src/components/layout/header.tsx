@@ -9,9 +9,10 @@ import { cn } from "@/lib/utils";
 
 const navLinks = [
   { href: "/", label: "Home" },
+  { href: "/events", label: "Events" },
   { href: "/music", label: "Music" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/about", label: "About" },
-  { href: "/updates", label: "Updates" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -20,29 +21,33 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur-sm">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 md:px-6">
-        <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
+    <header className="z-40 border-b border-border bg-background/95 backdrop-blur-sm">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-8">
+        <Link
+          href="/"
+          className="flex h-10 items-center gap-3 border border-border px-3"
+          onClick={() => setOpen(false)}
+        >
           <Image
             src="/logo.jpg"
             alt="Hollow Testament"
             width={48}
             height={48}
-            className="h-10 w-10 rounded-sm object-cover md:h-12 md:w-12"
+            className="h-6 w-6 object-cover"
             priority
           />
-          <span className="font-heading hidden text-lg tracking-widest sm:inline">
+          <span className="font-heading text-sm">
             Hollow Testament
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
+        <nav className="hidden items-center gap-7 md:flex" aria-label="Main">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className={cn(
-                "font-heading text-sm tracking-wider uppercase transition-colors hover:text-link",
+                "font-heading text-xs transition-colors hover:text-link",
                 pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href))
                   ? "text-accent"
                   : "text-foreground",
@@ -72,7 +77,7 @@ export function Header() {
                 <Link
                   href={link.href}
                   className={cn(
-                    "font-heading block py-2 text-sm tracking-wider uppercase",
+                    "font-heading block py-2 text-sm",
                     pathname === link.href ? "text-accent" : "text-foreground",
                   )}
                   onClick={() => setOpen(false)}

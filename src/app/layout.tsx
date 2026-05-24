@@ -28,7 +28,11 @@ export default async function RootLayout({
   const jsonLd = musicGroupJsonLd(settings);
 
   return (
-    <html lang="en" className={`${inter.variable} ${oswald.variable} h-full`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${oswald.variable} h-full`}
+      data-scroll-behavior="smooth"
+    >
       <body className="min-h-full flex flex-col antialiased">
         <script
           type="application/ld+json"

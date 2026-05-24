@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createUpdate } from "@/lib/data/updates";
+import { createEvent } from "@/lib/data/events";
 import { createClient } from "@/lib/supabase/server";
 
 export async function POST(request: Request) {
@@ -13,7 +13,7 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json();
-  const result = await createUpdate(body);
+  const result = await createEvent(body);
 
   if (!result.success) {
     return NextResponse.json({ error: result.error }, { status: 400 });

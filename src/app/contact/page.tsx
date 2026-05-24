@@ -37,19 +37,12 @@ export default async function ContactPage() {
                 </a>
               </p>
             )}
-            {settings.contact_phone && (
-              <p className="mt-2">
-                <a href={`tel:${settings.contact_phone}`} className="text-link hover:underline">
-                  {settings.contact_phone}
-                </a>
-              </p>
-            )}
           </div>
 
           <div>
             <h2 className="font-heading text-lg tracking-wide">Follow</h2>
             <div className="mt-4">
-              <SocialLinks settings={settings} />
+              <SocialLinks settings={settings} direction="column" />
             </div>
           </div>
         </aside>

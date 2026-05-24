@@ -58,8 +58,23 @@ body {
 
 .font-heading {
   font-family: var(--font-oswald), system-ui, sans-serif;
-  letter-spacing: 0.04em;
+  letter-spacing: 0;
   text-transform: uppercase;
+}
+
+.placeholder-frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background:
+    linear-gradient(to top right, transparent calc(50% - 1px), var(--border), transparent calc(50% + 1px)),
+    linear-gradient(to bottom right, transparent calc(50% - 1px), var(--border), transparent calc(50% + 1px)),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01));
+}
+
+.datetime-icon-white::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 1;
 }
 
 .prose-site {
@@ -131,6 +146,7 @@ body {
 
 .embed-responsive--spotify iframe {
   height: 352px;
+  border-radius: 12px;
 }
 
 @media (min-width: 768px) {

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { deleteUpdate, updateUpdateRecord } from "@/lib/data/updates";
+import { deleteEvent, updateEventRecord } from "@/lib/data/events";
 import { createClient } from "@/lib/supabase/server";
 
 type Props = { params: Promise<{ id: string }> };
@@ -20,7 +20,7 @@ export async function PUT(request: Request, { params }: Props) {
 
   const { id } = await params;
   const body = await request.json();
-  const result = await updateUpdateRecord(id, body);
+  const result = await updateEventRecord(id, body);
 
   if (!result.success) {
     return NextResponse.json({ error: result.error }, { status: 400 });
@@ -36,7 +36,7 @@ export async function DELETE(_request: Request, { params }: Props) {
   }
 
   const { id } = await params;
-  const result = await deleteUpdate(id);
+  const result = await deleteEvent(id);
 
   if (!result.success) {
     return NextResponse.json({ error: result.error }, { status: 400 });
