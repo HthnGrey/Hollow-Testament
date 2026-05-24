@@ -35,6 +35,7 @@ export default async function HomePage() {
   const primaryListenUrl = spotifyUrl ?? youtubeUrl;
   const releaseCoverUrl = settings.featured_release_cover_url?.trim();
   const youtubeThumbnailUrl = getYouTubeThumbnailUrl(settings.featured_release_youtube_url);
+  const releaseImageUsesYoutubeThumbnail = !releaseCoverUrl && Boolean(youtubeThumbnailUrl);
   const releaseImageUrl =
     releaseCoverUrl || youtubeThumbnailUrl || "/logo.jpg";
   const heroImageUrl = settings.hero_image_url?.trim() || "/logo.jpg";
@@ -82,7 +83,9 @@ export default async function HomePage() {
                 src={releaseImageUrl}
                 alt={releaseTitle}
                 fill
-                className="object-cover"
+                className={`object-cover object-center ${
+                  releaseImageUsesYoutubeThumbnail ? "scale-[1.35]" : ""
+                }`}
                 sizes="240px"
               />
             </div>

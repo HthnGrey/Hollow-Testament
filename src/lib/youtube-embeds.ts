@@ -30,7 +30,7 @@ export function getYouTubeVideoId(url: string | null | undefined): string | null
 
 export function getYouTubeThumbnailUrl(url: string | null | undefined): string | null {
   const id = getYouTubeVideoId(url);
-  return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : null;
+  return id ? `https://i.ytimg.com/vi/${id}/maxresdefault.jpg` : null;
 }
 
 export function parseYouTubeEmbeds(raw: unknown): YouTubeEmbedItem[] {
