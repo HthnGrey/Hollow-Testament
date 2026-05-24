@@ -42,7 +42,7 @@ export default async function HomePage() {
 
   return (
     <SiteLayout>
-      <section className="border-b border-border bg-[radial-gradient(circle_at_20%_20%,rgba(188,45,16,0.16),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.04),transparent_42%)]">
+      <section className="border-b border-border bg-[radial-gradient(circle_at_20%_20%,rgba(188,45,16,0.2),rgba(26,26,26,0.55)_42%,rgba(17,17,17,0.95)_100%)]">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 md:grid-cols-[1fr_minmax(280px,520px)] md:px-8 md:py-20">
           <div className="flex min-h-[440px] flex-col justify-center">
             <h1 className="font-heading max-w-xl text-6xl leading-[0.92] md:text-8xl">

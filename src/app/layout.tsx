@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Oswald } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { buildMetadata, musicGroupJsonLd } from "@/lib/seo";
 import { getSiteSettings } from "@/lib/data/settings";
@@ -13,6 +14,12 @@ const oswald = Oswald({
   variable: "--font-oswald",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+});
+
+const dkLemonYellowSun = localFont({
+  src: "./fonts/DK Lemon Yellow Sun.otf",
+  variable: "--font-dk-lemon-yellow-sun",
+  display: "swap",
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -30,7 +37,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${oswald.variable} h-full`}
+      className={`${inter.variable} ${oswald.variable} ${dkLemonYellowSun.variable} h-full`}
       data-scroll-behavior="smooth"
     >
       <body className="min-h-full flex flex-col antialiased">

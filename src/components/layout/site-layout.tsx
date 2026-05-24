@@ -6,7 +6,7 @@ export async function SiteLayout({ children }: { children: React.ReactNode }) {
   const settings = await getSiteSettings();
 
   return (
-    <div className="grain flex min-h-full flex-col">
+    <div className="grain flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">{children}</main>
       <Footer settings={settings} />

@@ -47,7 +47,7 @@ export function Header() {
               key={link.href}
               href={link.href}
               className={cn(
-                "font-heading text-xs transition-colors hover:text-link",
+                "font-heading text-base transition-colors hover:text-link",
                 pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href))
                   ? "text-accent"
                   : "text-foreground",
