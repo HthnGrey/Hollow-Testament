@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { CalendarDays, ExternalLink, Images, LayoutDashboard, LogOut, Settings } from "lucide-react";
+import { CalendarDays, ExternalLink, Images, LayoutDashboard, LogOut, Settings, UserCog } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { SITE_NAME } from "@/lib/defaults";
 import { cn } from "@/lib/utils";
@@ -13,6 +13,7 @@ const links = [
   { href: "/admin/events", label: "Events", icon: CalendarDays },
   { href: "/admin/gallery", label: "Gallery Uploads", icon: Images },
   { href: "/admin/settings", label: "Site Settings", icon: Settings },
+  { href: "/admin/account", label: "Account Settings", icon: UserCog },
 ];
 
 export function AdminNav() {
